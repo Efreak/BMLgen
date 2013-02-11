@@ -1,0 +1,41 @@
+<?
+$title1=$_GET['title1'];
+$title2=$_GET['title2'];
+$title3=$_GET['title3'];
+$toaddr=$_GET['toaddr'];
+$fromaddr1=$_GET['addr'];
+$moocher=$_GET['moocher'];
+$topr=$GET['topr'];
+$topg=$GET['topg'];
+$topb=$GET['topb'];
+$titr=$GET['titr'];
+$titg=$GET['titg'];
+$titb=$GET['titb'];
+$midr=$GET['midr'];
+$midg=$GET['midg'];
+$midb=$GET['midb'];
+
+$title1				= "Title: $title1";
+$title2				= "Title: $title2";
+$title3				= "Title: $title3";
+$from				= "From Bookmoocher: $moocher";
+$file				= 'Blank_Label.jpg';
+$dim				= getimagesize($file);
+$imagewidth			= $dim[0];
+$imageheight			= $dim[1];
+$image				= imagecreatefromjpeg($file);
+$top 				= imagecolorallocate($image, $topr, $topg, $topb);
+$titlecolor			= imagecolorallocate($image, $titr, $titg, $titb);
+$middle				= imagecolorallocate($image, $midr, $midg, $midb);
+$font 				= "./Arial-Black.ttf";
+imagettftext($image, 20, 0, 470, 25, $top, $font, $from);
+imagettftext($image, 20, 0, 550, 55, $top, $font, $fromaddr1);
+imagettftext($image, 20, 0, 550, 85, $top, $font, $fromaddr2);
+imagettftext($image, 15, 0, 150, 115, $titlecolor, $font, $title1);
+imagettftext($image, 15, 0, 150, 145, $titlecolor, $font, $title2);
+imagettftext($image, 15, 0, 150, 175, $titlecolor, $font, $title3);
+imagettftext($image, 45, 0, 250, 230, $middle, $font, $toaddr);
+header('Content-type: image/jpeg');
+imagejpeg($image);
+imagedestroy($image);
+?>
